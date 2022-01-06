@@ -41,3 +41,7 @@ Institute of Atmospheric Physics, Chinese Academy of Sciences (IAP/CAS)
 
 
 **Reference: Zhetao Tan, Lijing Cheng, Viktor Gouretski, Bin Zhang, Yanjun Wang, Fan Wang, Fuchao Li and Jiang Zhu, 2022: A new automatic quality control system for ocean in-situ temperature observations. _Journal of Geophysical Research: Oceans_ (submiited)**
+
+
+
+License: [Apache-2.0 License](https://github.com/zqtzt/COMSQC/blob/main/LICENSE)
