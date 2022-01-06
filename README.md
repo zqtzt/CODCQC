@@ -1,5 +1,5 @@
 # COMSQC
-An open source Python interface to the quality control of ocean in-situ observations.
+**An open source Python interface to the quality control of ocean in-situ observations.**
 
 COMS_QC is an open source Python interface to the quality control of ocean *in-situ* observations (e.g, temperature profiles, salinity profiles etc.). It was developed to reduce human-workload and time-consuming on manual quality control as well as adapt the increasing volume of daily real-time data flow on observing system and large data centers. 
 
@@ -19,7 +19,7 @@ Here, we delveoped an AutoQC system (we refer to this procedure as **COMS-QC** s
 - COMS_QC is a climatology-based automatic quality control algorithm. It is good at detecting bad data with paying an acceptable low price of sacrificing good data.
 - The performance of COMS_QC has been meticulously analyzed and evaluated by comparing it with other international QC systems in peer review now.
 
-In this version, COMS-QC is only avaliable for temperature observations. It convers all temperature data instrument types (e.g., Bottle, XBT, CTD, Argo, APB etc.).  In the future, COMS-QC will extent to salinity observations and oxygen observations.
+**In this version, COMS-QC is only avaliable for temperature observations**. It convers all temperature data instrument types (e.g., Bottle, XBT, CTD, Argo, APB etc.).  In the future, COMS-QC will extent to salinity observations and oxygen observations.
 
 
 ​	We are warmly welcome feedback/questions/fork/pull requests/improved the COMS_QC project!!
@@ -31,10 +31,13 @@ In this version, COMS-QC is only avaliable for temperature observations. It conv
 + [Pull requests](https://github.com/zqtzt/COMS-AutoQC/pulls]) your debugged/improved codes in the Github community
 
 + Send an email to us: <font color=#0099ff><u>tanzhetao@mail.iap.ac.cn</u> </font><font color=#0099ff> or <u>chenglij@mail.iap.ac.cn</u> </font>
-+ 
+
 
 
 Author: Zhetao Tan (<font color=#0099ff><u>tanzhetao@mail.iap.ac.cn</u></font>) 
 Contributor: Lijing Cheng, Viktor Gourestki, Yanjun Wang, Bin Zhang
 Center for Ocean Mega-Science, Chinese Academy of Sciences (COMS/CAS)
 Institute of Atmospheric Physics, Chinese Academy of Sciences (IAP/CAS)
+
+
+**Reference: Zhetao Tan, Lijing Cheng, Viktor Gouretski, Bin Zhang, Yanjun Wang, Fan Wang, Fuchao Li and Jiang Zhu, 2022: A new automatic quality control system for ocean in-situ temperature observations. _Journal of Geophysical Research: Oceans_ (submiited)**
