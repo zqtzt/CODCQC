@@ -1,7 +1,7 @@
-# COMSQC
+# CODCQC
 **An open source Python interface to the quality control of ocean in-situ observations.**
 
-COMS_QC is an open source Python interface to the quality control of ocean *in-situ* observations (e.g, temperature profiles, salinity profiles etc.). It was developed to reduce human-workload and time-consuming on manual quality control as well as adapt the increasing volume of daily real-time data flow on observing system and large data centers. 
+CODC_QC is an open source Python interface to the quality control of ocean *in-situ* observations (e.g, temperature profiles, salinity profiles etc.). It was developed to reduce human-workload and time-consuming on manual quality control as well as adapt the increasing volume of daily real-time data flow on observing system and large data centers. 
 
 The *in-situ* observations collected from the ocean are quality-heterogeneous. Decades of efforts have been dedicated to developing different manual or automatic quality control (QC) system to improve the quality and availability of ocean database, which is one of the basic tasks in many oceanic studies.
 
@@ -11,18 +11,18 @@ Here, we delveoped an AutoQC system (we refer to this procedure as **COMS-QC** s
 
 
 
-> #### Why COMS_QC
+> #### Why CODC_QC
 
-- COMS_QC contains several QC checks that can be easily combined and tuned by users.
-- COMS_QC provides many typical data interface for inputting raw data.
-- The QC flags in COMS_QC are optional multiple categories, which depends on user's purposes.
-- COMS_QC is a climatology-based automatic quality control algorithm. It is good at detecting bad data with paying an acceptable low price of sacrificing good data.
-- The performance of COMS_QC has been meticulously analyzed and evaluated by comparing it with other international QC systems in peer review now.
+- CODC_QC contains several QC checks that can be easily combined and tuned by users.
+- CODC_QC provides many typical data interface for inputting raw data.
+- The QC flags in CODC_QC are optional multiple categories, which depends on user's purposes.
+- CODC_QC is a climatology-based automatic quality control algorithm. It is good at detecting bad data with paying an acceptable low price of sacrificing good data.
+- The performance of CODC_QC has been meticulously analyzed and evaluated by comparing it with other international QC systems in peer review now.
 
-**In this version, COMS-QC is only avaliable for temperature observations**. It convers all temperature data instrument types (e.g., Bottle, XBT, CTD, Argo, APB etc.).  In the future, COMS-QC will extent to salinity observations and oxygen observations.
+**In this version, CODC_QC is only avaliable for temperature observations**. It convers all temperature data instrument types (e.g., Bottle, XBT, CTD, Argo, APB etc.).  In the future, COMS-QC will extent to salinity observations and oxygen observations.
 
 
-​	We are warmly welcome feedback/questions/fork/pull requests/improved the COMS_QC project!!
+​	We are warmly welcome feedback/questions/fork/pull requests/improved the CODC_QC project!!
 
 ​	If you have any questions/suggestions about this program, or if you find some bugs in this program, or even if you are willing to debug/improved the COMS_QC project, please feel free and do not hesitate to tell us via:
 
@@ -40,7 +40,7 @@ Center for Ocean Mega-Science, Chinese Academy of Sciences (COMS/CAS)
 Institute of Atmospheric Physics, Chinese Academy of Sciences (IAP/CAS)
 
 
-**Reference: Zhetao Tan, Lijing Cheng, Viktor Gouretski, Bin Zhang, Yanjun Wang, Fan Wang, Fuchao Li and Jiang Zhu, 2022: A new automatic quality control system for ocean in-situ temperature observations. _Journal of Geophysical Research: Oceans_ (submiited)**
+**Reference: Zhetao Tan, Lijing Cheng, Viktor Gouretski, Bin Zhang, Yanjun Wang, Fan Wang, Fuchao Li and Jiang Zhu, 2022: A new automatic quality control system for ocean in-situ temperature observations. _Progress in Oceanography_ (submiited)**
 
 
 
