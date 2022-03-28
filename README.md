@@ -1,4 +1,6 @@
 # CODCQC
+==__**An Introduction of how to use this code will be uploaded soon**__==
+
 **An open source Python interface to the quality control of ocean in-situ observations.**
 
 CODC_QC is an open source Python interface to the quality control of ocean *in-situ* observations (e.g, temperature profiles, salinity profiles etc.). It was developed to reduce human-workload and time-consuming on manual quality control as well as adapt the increasing volume of daily real-time data flow on observing system and large data centers. 
