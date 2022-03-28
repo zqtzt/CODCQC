@@ -1,5 +1,6 @@
-# CODCQC
-==__**An Introduction of how to use this code will be uploaded soon**__==
+# CODC_QC
+
+__**An Introduction of how to use these codes will be uploaded soon**__
 
 **An open source Python interface to the quality control of ocean in-situ observations.**
 
