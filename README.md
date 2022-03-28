@@ -19,7 +19,7 @@ Here, we delveoped an AutoQC system (we refer to this procedure as **COMS-QC** s
 - CODC_QC is a climatology-based automatic quality control algorithm. It is good at detecting bad data with paying an acceptable low price of sacrificing good data.
 - The performance of CODC_QC has been meticulously analyzed and evaluated by comparing it with other international QC systems in peer review now.
 
-**In this version, CODC_QC is only avaliable for temperature observations**. It convers all temperature data instrument types (e.g., Bottle, XBT, CTD, Argo, APB etc.).  In the future, COMS-QC will extent to salinity observations and oxygen observations.
+**In this version, CODC_QC is only avaliable for temperature observations**. It convers all temperature data instrument types (e.g., Bottle, XBT, CTD, Argo, APB etc.).  In the future, CODC_QC will extent to salinity observations and oxygen observations.
 
 
 ​	We are warmly welcome feedback/questions/fork/pull requests/improved the CODC_QC project!!
