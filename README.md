@@ -1,9 +1,10 @@
 # CODCQC
-
-__**The user manual of CODC-QC is available now!! ((clip here)[https://github.com/zqtzt/CODCQC/]) **__
-
-
 **An open source Python interface to the quality control of ocean in-situ observations.**
+
+**The User Manual of CODC-QC is available now!! ([clip here](https://github.com/zqtzt/CODCQC/)) **
+
+### Installing CODC-QC
+**Please first download the Python CODCQC package `CODC-QC-1.0-py3-none-any.whl` [here](http://www.ocean.iap.ac.cn/ftp/cheng/CODC-QC/) and follow the User Manual to install and get started.**
 
 CODC-QC (CAS-Ocean Data Center (CODC) Quality Control system) is an open source Python interface to the quality control of ocean *in-situ* observations (e.g, temperature profiles, salinity profiles etc.). It was developed to reduce human-workload and time-consuming on manual quality control as well as adapt the increasing volume of daily real-time data flow on observing system and large data centers. 
 
@@ -12,7 +13,6 @@ The *in-situ* observations collected from the ocean are quality-heterogeneous. D
 The goals of developing the auutomatic QC (AutoQC) is to provide a quality-hemogeonous database, with reduciing human-workload and time-consuming on manual QC as well as adapting the increasing volume of daily real-time data flow on observing system and large data centers. 
 
 Here, we delveoped an AutoQC system (we refer to this procedure as **CODC-QC** system (CAS-Ocean Data Center Quality Control system) to quality control the ocean *in-situ* observations. 
-
 
 
 > #### Why CODC_QC
