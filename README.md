@@ -1,7 +1,7 @@
 # CODCQC
 **An open source Python interface to the quality control of ocean in-situ observations.**
 
-**The User Manual of CODC-QC is available now!! ([clip here](https://github.com/zqtzt/CODCQC/)) **
+### The User Manual of CODC-QC is available now!! ([clip here](https://github.com/zqtzt/CODCQC/))
 
 ### Installing CODC-QC
 **Please first download the Python CODCQC package `CODC-QC-1.0-py3-none-any.whl` [here](http://www.ocean.iap.ac.cn/ftp/cheng/CODC-QC/) and follow the User Manual to install and get started.**
