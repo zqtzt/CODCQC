@@ -35,7 +35,11 @@ class QualityControl(object):
         [COMS_PATH, a] = os.path.split(CODCQC.__file__)
         ##  GEBCO_2021_15arc-seconds data
         print('start reading GEBCO depth file')
-        data = np.load(COMS_PATH+'./background_field/gebco_2021_15arcsecond.npz')
+        if(not os.path.exists(COMS_PATH+'/background_field/gebco_2021_15arcsecond.npz')):
+            print('The external file [ebco_2021_15arcsecond.npz] does not exist in this package, please download the file with the same name in this link [http://www.ocean.iap.ac.cn/ftp/cheng/CODC-QC/]')
+            print('And then please put this file in a folder named [background_field] under the installed path of CODCQC package')
+            raise('Error')
+        data = np.load(COMS_PATH+'/background_field/gebco_2021_15arcsecond.npz')
         self.elevation = data['elevation']
         self.gebco_lat_bnd = data['lat_bnd']
         self.gebco_lon_bnd = data['lon_bnd']
@@ -44,7 +48,11 @@ class QualityControl(object):
         # Temperature 1 degree-climatology field (constant IAP-T-range)
         from scipy import io
         print('start reading temperature climatology field')
-        mat = io.loadmat(COMS_PATH+'./background_field/IAP_T_range.mat')
+        if(not os.path.exists(COMS_PATH+'/background_field/IAP_T_range.mat')):
+            print('The external file [IAP_T_range.mat] does not exist in this package, please download the file with the same name in this link [http://www.ocean.iap.ac.cn/ftp/cheng/CODC-QC/]')
+            print('And then please put this file in a folder named [background_field] under the installed path of CODCQC package')
+            raise('Error')        
+        mat = io.loadmat(COMS_PATH+'/background_field/IAP_T_range.mat')
         self.tmin = mat['T_min']
         self.tmax = mat['T_max']
         Std_depth = mat['Std_depth']
@@ -64,7 +72,11 @@ class QualityControl(object):
         # Temperature: k_min k_max linear coefficient for time-varying IAP-T-range
         from scipy import io
         print('start reading linear coefficient for time-varying IAP-T-range')
-        mat = io.loadmat(COMS_PATH+'./background_field/IAP_T_range_kmax_kmin.mat')
+        if(not os.path.exists(COMS_PATH+'/background_field/IAP_T_range_kmax_kmin.mat')):
+            print('The external file [IAP_T_range_kmax_kmin.mat] does not exist in this package, please download the file with the same name in this link [http://www.ocean.iap.ac.cn/ftp/cheng/CODC-QC/]')
+            print('And then please put this file in a folder named [background_field] under the installed path of CODCQC package')
+            raise('Error') 
+        mat = io.loadmat(COMS_PATH+'/background_field/IAP_T_range_kmax_kmin.mat')
         self.kmin_T = mat['T_min_linear_coeff']
         self.kmax_T = mat['T_max_linear_coeff']
         del mat
@@ -72,7 +84,11 @@ class QualityControl(object):
 
         ## T-gradient climatology field (IAP-TG-range)
         print('start reading temperature gradient climatology field')
-        mat = io.loadmat(COMS_PATH+'./background_field/IAP_TG_range.mat')
+        if(not os.path.exists(COMS_PATH+'/background_field/IAP_TG_range.mat')):
+            print('The external file [IAP_TG_range.mat] does not exist in this package, please download the file with the same name in this link [http://www.ocean.iap.ac.cn/ftp/cheng/CODC-QC/]')
+            print('And then please put this file in a folder named [background_field] under the installed path of CODCQC package')
+            raise('Error')         
+        mat = io.loadmat(COMS_PATH+'/background_field/IAP_TG_range.mat')
         self.Gradmin = mat['Gmin_all'][:]  # (360,180,79,12,6)
         self.Gradmax = mat['Gmax_all'][:]
         self.interp_grid = mat['interp_grid'][:]
@@ -89,7 +105,11 @@ class QualityControl(object):
 
         ###### IAP41 salinity climatology files
         print('start reading salinity climatology field')
-        mat = io.loadmat(COMS_PATH+'./background_field/climatology_Savg_IAP41_1955_2020.mat')
+        if(not os.path.exists(COMS_PATH+'/background_field/climatology_Savg_IAP41_1955_2020.mat')):
+            print('The external file [climatology_Savg_IAP41_1955_2020.mat] does not exist in this package, please download the file with the same name in this link [http://www.ocean.iap.ac.cn/ftp/cheng/CODC-QC/]')
+            print('And then please put this file in a folder named [background_field] under the installed path of CODCQC package')
+            raise('Error')          
+        mat = io.loadmat(COMS_PATH+'/background_field/climatology_Savg_IAP41_1955_2020.mat')
         self.Savg = mat['S_avg']
         Std_depth_41 = mat['Std_depth_41']
         Std_depth_41 = np.transpose(Std_depth_41)[0]
