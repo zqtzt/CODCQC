@@ -43,7 +43,7 @@ def main(file_path,makeTemperatureQC=True,makeSalinityQC=False):
     print('time cost: '+str(t2-t1))
 
 if __name__ == '__main__':
-    filepath='E:\\QC_science\\CODCQC_package\\onlyT_v1.1\\CODCQC\\tests\\WOD18_netCDF_temp_data\\WOD18_netCDF_temp_data\\'
+    filepath='./CODCQC/tests/WOD18_netCDF_temp_data/WOD18_netCDF_temp_data/'
     makeTemperatureQC=True
     makeSalinityQC=False
     main(filepath,makeTemperatureQC,makeSalinityQC)

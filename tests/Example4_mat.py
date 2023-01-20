@@ -29,7 +29,6 @@ def QC_MATLAB(filepath,makeTemperatureQC=True,makeSalinityQC=False):
 
         [levels_max, xbtn] = np.shape(tem_raw)
         print(xbtn)
-        # 建立空数组
         if(makeTemperatureQC):
             myflagt_final_checks = np.full((xbtn, levels_max, len(const.kflagt_T_list)), np.nan)
             myflagt_final_all = np.full((xbtn, levels_max), np.nan)
@@ -85,7 +84,11 @@ def QC_MATLAB(filepath,makeTemperatureQC=True,makeSalinityQC=False):
 
 
 if __name__ == '__main__':
-    file_path = 'E:\\QC_science\\CODCQC_package\\onlyT_v1.1\\CODCQC\\tests\\WOD18_mat_temp_data\\'
+    file_path = './CODCQC/tests/WOD18_mat_temp_data/'
     makeTemperatureQC=True
     makeSalinityQC=False
+    import time
+    t1=time.time()
     QC_MATLAB(file_path,makeTemperatureQC,makeSalinityQC)
+    t2=time.time()
+    print(t2-t1)

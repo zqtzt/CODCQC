@@ -27,6 +27,7 @@ import CODCQC.CODCQC_main as CODCQC_main
 from CODCQC.util import IO_functions
 from CODCQC.util import print_stat
 from CODCQC.util import CODCQC_constant as const
+import os
 import numpy as np
 
 makeTemperatureQC=True
@@ -34,7 +35,9 @@ makeSalinityQC=False
 
 qc = CODCQC_main.QualityControl()
 
-txt_file='./Example2_txt_input.txt'
+[COMS_PATH, a] = os.path.split(CODCQC.__file__)
+
+txt_file=COMS_PATH+'/tests/Example3_txt_input.txt'
 [depth_all,tem_all,sal_all,meta_list]=IO_functions.read_data_from_TXT(txt_file)
 
 num_prof=len(tem_all)
@@ -69,7 +72,7 @@ for i in range(num_prof):
 
 
 #### write txt file
-output_file='./Example3_txt_output.txt'
+output_file='./Example3_txt_output.txt'  #create a new file
 IO_functions.write_QCflag_to_txt_T(output_file,depth_all,tem_all,meta_list,myflagt_all)
 print('WRITING FLAG is finished: '+output_file)
 

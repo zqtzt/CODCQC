@@ -1,7 +1,7 @@
 # @author Zhetao Tan (IAP/CAS)
-# @version: COMS-AutoQC v1.0
+# @version: CODC-AutoQC v1.0
 '''
-    Here is an example of how to make the COMS AutoQC program manually with a single oceanic observation profile (Now only Temperature are available)
+    Here is an example of how to make the CODC AutoQC program manually with a single oceanic observation profile (Now only Temperature are available)
     You should only give 3 input variables to the QC check main function "check_profileQC_main()": depth,tem,meta
     depth,tem: 1-dimension array or list
     meta: a class object with metadata attributes (include meta.lat, meta.lon, meta.levels, meta.year, meta.month, meta.day, meta.typ3)
@@ -34,7 +34,7 @@ meta.levels=len(depth)
 meta.typ3= 'CTD'  #consistent with WOD code table: https://www.ncei.noaa.gov/access/world-ocean-database/CODES/wod-datasets.html
 meta.gebcodepth=qc.get_gebcodepth(meta)
 
-# make COMS-AutoQC v1.0 check
+# make CODC-QC v1.0 check
 [myflagt, kflagt_T_checks] = qc.check_T_main(tem, depth, meta)
 
 
