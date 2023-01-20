@@ -14,10 +14,10 @@ Here, we delveoped an AutoQC system (we refer to this procedure as **CODC-QC** s
 #### Installing CODC-QC
 
 * We strongly recommend to use **version 3.7** of Python to run CODCQC
-* If you have already installed Python3.7, then you can use **pip** to install CODCQC
+* If you have already installed Python3.7, then you can use **pip** from PyPI to install CODCQC
 
 ```shell
-pip install CODCQC
+python3 -m pip install CODCQC
 ```
 
 please make sure <b> PIP </b> fits your version of Python3.X. In some machines, you should use `pip3 install CODC_QC` because **"pip"** may be linked to python2.X 
