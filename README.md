@@ -24,6 +24,8 @@ please make sure <b> PIP </b> fits your version of Python3.X. In some machines, 
 
 #### **Please first follow the [CODCQC User Manual](https://github.com/zqtzt/CODCQC/) to <u>download/</u><u>install external (built-in) files</u> and get started.**
 
+##### **The external (built-in) files could be also downloaded [here](http://www.ocean.iap.ac.cn/ftp/cheng/CODC-QC/). Once you have downloaded, please put these files into a folder named [background_field] under the installed path of CODCQC package**
+
 
 
 > #### Why CODC-QC
