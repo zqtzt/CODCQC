@@ -57,7 +57,7 @@ def write_MATLAB_T(filename,myflagt_final_all,myflagt_final_checks):
 
     mdic = {'CODCQC_myflagt': myflagt_final_all, 'CODCQC_myflagt_checks': myflagt_final_checks}
 
-    strings = filepath + '/CODCQCflag_' + OuputFilename + '.mat'
+    strings = filepath + '/CODCQCflag/CODCQCflag_' + OuputFilename + '.mat'
     scio.savemat(strings, mdic,do_compression=True)
 
 # read input data from *.txt file
@@ -212,12 +212,17 @@ class metaData(object):
 
 def read_variables(f):
     temp=f.variables['Temperature'][:]
+    temp=np.reshape(temp,-1)
     temp = ma.array(temp, mask=np.isnan(temp.data))
     depth=f.variables['z'][:]
+    depth=np.reshape(depth,-1)
+    # if(type(depth) is not np.ndarray):
+        # depth=np.array(depth)
     depth = ma.array(depth, mask=np.isnan(depth.data))
 
     try:
         sal=f.variables['Salinity'][:]
+        sal=np.reshape(sal,-1)
         sal = ma.array(sal, mask=np.isnan(sal.data))
     except:
         sal=np.full((len(depth),1),np.nan)
@@ -254,5 +259,14 @@ def read_variables(f):
 
 def read_WOD(file):
     f = nc.Dataset(file, 'a')
-    [tem, sal,depth, meta,]=read_variables(f)
+    [tem, sal,depth, meta]=read_variables(f)
+    
+    if meta.levels>=3:
+        if(depth[0]==0):
+            depth[np.where(depth==0)]=np.nan
+            depth[0]=0
+        else:
+            depth[np.where(depth==0)]=np.nan
+    depth = ma.array(depth, mask=np.isnan(depth.data))
+    
     return f,tem, sal, depth, meta
