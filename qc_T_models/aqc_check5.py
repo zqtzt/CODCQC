@@ -22,7 +22,7 @@ def crude_range(qc_object,depth, tem, meta):
         isData = np.logical_and(depth.mask == False, tem.mask == False)
     kflagt = np.zeros(levels, int)
 
-    ####最大范围检验
+    ####maximum range check
     kflagt[np.where(tem < const.parminover_T) or np.where(tem > const.parmaxover_T)] = 1
     for i in range(levels):
         if (~isData[i]):

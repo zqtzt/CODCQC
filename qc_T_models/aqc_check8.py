@@ -10,7 +10,7 @@ def constant_value(qc_object,depth, tem, meta):
         return kflagt
 
     # criteria for the minimum number of levels within the thermostad
-    minlevstad = 7  # 主观设置 the number of such exactly the same temperature value within the layer.
+    minlevstad = 7  #  the number of such exactly the same temperature value within the layer.
     if (typ3 == 'OSD'):
         minlevstad = 10
     elif (typ3 == 'APB' or typ3 == 'XBT' or typ3 == 'PFL' or typ3 == 'PF' or typ3 == 'XB'):
@@ -20,13 +20,13 @@ def constant_value(qc_object,depth, tem, meta):
 
     # minimum thickness of the thermostad layer
     thickmin = 300.0  # subjective
-    if (meta.lat >= 65 or meta.lat <= -65):  # Polar region 可以增加到500米
+    if (meta.lat >= 65 or meta.lat <= -65):  # Polar region 
         thickmin = 400.0
     if (levels <= minlevstad):  # no check for short profiles
         return kflagt
     num = np.full(levels, np.nan)
     for k in range(levels - minlevstad):
-        num[k] = np.nansum(np.abs(tem[k:] - tem[k]) <= 0.001)  # 这就被认为是相等的值
+        num[k] = np.nansum(np.abs(tem[k:] - tem[k]) <= 0.001) 
     num[np.logical_or(tem < -2, ~isData)] = np.nan
     num = num[~np.isnan(num)]
     try:
@@ -44,6 +44,6 @@ def constant_value(qc_object,depth, tem, meta):
         if (thick >= thickmin):
             kflagt[int(kuma):int(kuma + numa)] = 1  # flag levels within the stad
             if ('XBT' in typ3 or 'xb' in typ3 or 'xbt' in typ3):
-                kflagt[int(kuma):] = 1  # XBT整条廓线标记
+                kflagt[int(kuma):] = 1  
 
     return kflagt

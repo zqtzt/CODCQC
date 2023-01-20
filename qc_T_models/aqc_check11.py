@@ -24,8 +24,8 @@ def number_of_temperature_extrema(qc_object,depth, tem, meta):
     index = np.insert(index, 0, False)
     index = np.insert(index, -1, False)
 
-    kflagt[index] = 1  # 牛眼位置标记为1
-    if (np.sum(kflagt == 1) > const.maxextre):  # 牛眼的个数大于4，则整个剖面做标记
+    kflagt[index] = 1  # spike location 
+    if (np.sum(kflagt == 1) > const.maxextre):  # number of spikes > 4, flag the whole profile
         kflagt[:] = 1
         
     kflagt[depth<10]=0

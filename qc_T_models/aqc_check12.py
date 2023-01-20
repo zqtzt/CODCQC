@@ -28,8 +28,8 @@ def global_gradient_check(qc_object,depth, tem, meta):
     index = np.logical_or(tem <= const.parminover_T, tem >= const.parmaxover_T)
     kflagt[index] = 1
 
-    gradient = np.diff(tem) / np.diff(depth)  # 求梯度
-    zedg = movmean(depth, 2)  # 滑动平均，等价于zedg=0.5*(depth[i]+depth[i+1])
+    gradient = np.diff(tem) / np.diff(depth)  # calculate gradient
+    zedg = movmean(depth, 2)  # movmean，equal to zedg=0.5*(depth[i]+depth[i+1])
     zedg[zedg < 1] = 1
     
     # The gradient ranges are deﬁned on the basis of the depth–gradient histograms.
@@ -53,7 +53,7 @@ def movmean(T, m):
     sums[0] = np.sum(T[0:m])
 
     cumsum = np.cumsum(T)
-    cumsum = np.insert(cumsum, 0, 0)  # 在数组开头插入一个0
+    cumsum = np.insert(cumsum, 0, 0) 
 
     sums = cumsum[m:] - cumsum[:-m]
     return sums / m

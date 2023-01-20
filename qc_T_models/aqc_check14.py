@@ -8,7 +8,8 @@ def instrument_specific_check_XBT(qc_object,depth, kflagt12, meta):
         return kflagt
     if (levels <= 3):  # not check for few levels profiles
         return kflagt
-
+    if (np.nanmax(depth)<=150):  #no check for upper 150m
+        return kflagt     
     #central difference to get the profile gradient in different interval levels
     d1 = np.diff(depth)
     d_left = d1[0:-1]
@@ -16,14 +17,15 @@ def instrument_specific_check_XBT(qc_object,depth, kflagt12, meta):
     distance_3points = d_left + d_right
     distance_3points = np.concatenate(([0], distance_3points, [d1[-1]]))
     makeMean_gradient = np.zeros(levels, int)
-    makeMean_gradient[distance_3points < 10] = 1  # 三点距离小于10m的，用成老师提出的方法mean gradient计算梯度
+    makeMean_gradient[distance_3points < 10] = 1 
 
     #####main check
     if (np.nanmax(depth) <= 650):
         [kflagt, XBT_flag] = check_XBT_T4_T6(depth, makeMean_gradient, kflagt12)
     elif (np.nanmax(depth) <= 1200):
         [kflagt, XBT_flag] = check_XBT_T7_DB(depth, makeMean_gradient, kflagt12)
-
+    
+    kflagt[depth <= 150] = 0 
     return kflagt
 
 
@@ -35,7 +37,7 @@ def groupby(data1D):
     return num_continue,loc_begin
 
 def check_XBT_T4_T6(depth,makeMake_gradient,kflagt):
-    begin_depth=0
+    begin_depth=150  #从150米往下
     maximum_depth=650
     XBT_flag=0
     if(np.nanmax(depth)<maximum_depth and np.nansum(makeMake_gradient)>10 and np.nansum(kflagt[depth>begin_depth])>10):

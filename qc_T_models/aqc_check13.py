@@ -10,6 +10,7 @@ def gradient_climatology_check(qc_object,depth, tem, meta):
         kflagt = np.zeros(levels, int)
         _ = np.nan
         return kflagt, _, _, _
+  
     if ('MRB' in typ3 or 'moored buoy' in typ3 or 'mrb' in typ3 or 'SUR' in typ3):  # MRB是定点观测，不做梯度检查
         kflagt = np.zeros(levels, int)
         _ = np.nan
@@ -22,8 +23,12 @@ def gradient_climatology_check(qc_object,depth, tem, meta):
         isData = np.logical_and(depth.mask == False, tem.mask == False)
     rlat = meta.lat
     rlon = meta.lon
-    month = meta.month
-
+    month = meta.month 
+    if (np.nanmax(depth)<=150):  #no check for upper 150m
+        kflagt = np.zeros(levels, int)
+        _ = np.nan
+        return kflagt, _, _, _      
+        
     #central difference to get the profile gradient in different interval levels
     t1 = np.diff(tem)
     t_left = t1[0:-1]
@@ -36,7 +41,7 @@ def gradient_climatology_check(qc_object,depth, tem, meta):
     dtdz = (t_left + t_right) / (d_left + d_right)
     dtdz = np.concatenate(([np.nan], dtdz, [t1[-1] / d1[-1]]))
     makeMean_gradient = np.zeros(levels, int)
-    makeMean_gradient[distance_3points < 10] = 1  # 三点距离小于10m的，用成老师提出的方法mean gradient计算梯度
+    makeMean_gradient[distance_3points < 10] = 1  # distance inside three points，mean gradient
     dtdz_makeMeangradient = profile_mean_gradient_QC(meta, tem, depth, makeMean_gradient)
     dtdz[np.logical_and(makeMean_gradient == 1, ~np.isnan(dtdz_makeMeangradient))] = dtdz_makeMeangradient[
         np.logical_and(makeMean_gradient == 1, ~np.isnan(dtdz_makeMeangradient))]
@@ -45,16 +50,16 @@ def gradient_climatology_check(qc_object,depth, tem, meta):
     distance_3points = np.round(distance_3points)
     distance_flag = distance_3points - 10 + 1
     # print(type(distance_flag))
-    distance_flag[distance_flag >= 151] = np.nan  # 点距离超过160m的不计算
+    distance_flag[distance_flag >= 151] = np.nan  # no checks for distance greater than 160m (low resolution profile)
     distance_flag[distance_flag < 0] = 1
     distance_flag[makeMean_gradient == 1] = 1  # 小于10m的都用mean_gradient_clj 变到10m的间隔去算梯度
 
     # find grid-index for MIN/MAX-fields from lat/lon values
     try:
         jy = np.where(np.logical_and(rlat > qc_object.Grad_lat_bound[0, :], rlat <= qc_object.Grad_lat_bound[1, :]))[0][
-            0]  # 纬度
+            0]  # latitude
         ix = np.where(np.logical_and(rlon > qc_object.Grad_lon_bound[0, :], rlon <= qc_object.Grad_lon_bound[1, :]))[0][
-            0]  # 经度
+            0]  # longitude
     except:
         kflagt = np.zeros(levels, int)
         _ = np.nan
@@ -74,7 +79,7 @@ def gradient_climatology_check(qc_object,depth, tem, meta):
     Q05_grid_interp = climatology_horzional_interp(qc_object.Gradmin, ix, jy, qc_object.interp_grid, month)
     Q995_grid_interp = climatology_horzional_interp(qc_object.Gradmax, ix, jy, qc_object.interp_grid, month)
 
-    # 两个用于存储气候态上下界的列表
+
     depth_index = np.array(depth_index)
     index_NaN = np.logical_or(np.isnan(depth_index), np.isnan(distance_flag))
     depth_index = depth_index.astype(int)
@@ -91,12 +96,13 @@ def gradient_climatology_check(qc_object,depth, tem, meta):
     Gradmax_array[np.isnan(Gradmax_array)] = const.DTDZmaxover
 
     # input torlerance and start flagging
-    if ('PFL' in typ3 or 'CTD' in typ3 or 'GLD' in typ3 or 'Argo' in typ3):
-        # 对PFL CTD GLD 最后几个被单边差分的点，进行阈值的扩宽
+    type_advanced = ['CTD', 'CT', 'CU', 'ctd', 'PFL', 'pfl', 'profiling', 'DRB', 'Drifting','GLD','glider','Argo','argo']
+    if (typ3 in type_advanced):
+        # for PFL, CTD and GLD, gibe tolerance for the threshold
         index2 = depth < (np.nanmax(depth) - 10)
         index3 = depth <= 2000
         index4 = makeMean_gradient == 1
-        index1 = np.logical_and.reduce([index2, index3, index4])  # 多个条件判断
+        index1 = np.logical_and.reduce([index2, index3, index4])  
         if ('GLD' in typ3):
             flag_noSignleSide = np.logical_or(
                 (dtdz[index1 == 0] < Gradmin_array[index1 == 0] - np.abs(Gradmin_array[index1 == 0]) * 0.01),
@@ -127,7 +133,7 @@ def gradient_climatology_check(qc_object,depth, tem, meta):
         index2 = depth > (np.nanmax(depth) - 10)
         index3 = depth <= 2000
         index4 = makeMean_gradient
-        index1 = np.logical_and.reduce([index2, index3, index4])  # 多个条件判断
+        index1 = np.logical_and.reduce([index2, index3, index4])  
         flag_noSignleSide = np.logical_or(
             (dtdz[index1 == 0] < Gradmin_array[index1 == 0] - np.abs(Gradmin_array[index1 == 0]) * 0.01),
             (dtdz[index1 == 0] > Gradmax_array[index1 == 0] + np.abs(Gradmax_array[index1 == 0]) * 0.01))
@@ -136,8 +142,10 @@ def gradient_climatology_check(qc_object,depth, tem, meta):
             (dtdz[index1 == 1] > Gradmax_array[index1 == 1] + np.abs(Gradmax_array[index1 == 1]) * 0.2))
         kflagt[index1 == 0] = flag_noSignleSide
         kflagt[index1 == 1] = flag_SignleSide
-    if (not ('XBT' in typ3 or 'xbt' in typ3)):  # 除XBT外，表层10m不做梯度气候态检查
+    if (not ('XBT' in typ3 or 'xbt' in typ3)):  
         kflagt[depth < 10] = 0
+    
+    kflagt[depth <= 150] = 0  #no check for upper 150m 
 
     return kflagt, dtdz, Gradmin_array, Gradmax_array
 
@@ -146,8 +154,11 @@ def gradient_climatology_check(qc_object,depth, tem, meta):
 def profile_mean_gradient_QC(meta,tem,depth,makeMean_gradient,depth_interval_left=10,depth_interval_right=12.5):
     dtdz=np.full(meta.levels,np.nan)
     dz=np.concatenate(([0],np.diff(depth)))
-
+    isData = np.logical_and(depth.mask == False, tem.mask == False)
+    
     for k in range(1,meta.levels):
+        if(~isData[k]):
+            continue
         if(makeMean_gradient[k]):
             index=k
             #找出左右的位置索引
@@ -223,7 +234,7 @@ def profile_mean_gradient_QC(meta,tem,depth,makeMean_gradient,depth_interval_lef
                             break
                         left_index=left_index-1
                     depth_inteval=depth[right_index]-depth[left_index]
-                    temp_right=tem[right_index]
+                    temp_right=tem[right_index]                    
                     temp_left=np.nanmean(tem[left_index:right_index])
                     dtdz[k]=(temp_right-temp_left)/depth_inteval
 

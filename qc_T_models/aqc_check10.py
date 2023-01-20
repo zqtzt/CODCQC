@@ -10,6 +10,8 @@ def density_inversion_check(qc_object,depth, tem, meta,salinity=[]):
         return kflagt
     if(np.all(np.isnan(salinity)) or salinity==[]):  #no salinity observation, pass
         return kflagt
+    if('MRB' in meta.typ3 or 'mrb' in meta.typ3 or 'buoy' in meta.typ3):
+        return kflagt
     rlat = meta.lat
     rlon = meta.lon
     # month = meta.month

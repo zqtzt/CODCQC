@@ -1,7 +1,6 @@
 import numpy as np
 
 def levels_order(qc_object,depth,tem,meta):
-    #取有效值
     depth_bak=depth
     depth_org = np.copy(depth)
     tem_bak=tem
@@ -24,5 +23,5 @@ def levels_order(qc_object,depth,tem,meta):
     depth_bak[isData]=depth.data
     tem_bak[isData]=tem.data
 
-    kflagt1[np.where(depth_bak != depth_org)] = 1   #我觉得把它订正调换好熟顺序之后就行了，不需要标记吧，这个可以在以后多分类的时候标记been modified
+    kflagt1[np.where(depth_bak != depth_org)] = 1   
     return kflagt1,depth_bak,tem_bak

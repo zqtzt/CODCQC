@@ -15,7 +15,6 @@ def climatology_check(qc_object,depth, tem, meta):
     month = meta.month
     iyear=meta.year
 
-    # 两个用于存储气候态上下界的列表
     tmin_array = []
     tmax_array = []
     kflagt = np.zeros(levels, np.int)
@@ -51,12 +50,12 @@ def climatology_check(qc_object,depth, tem, meta):
             tmin_array.append(const.parminover_T)
             tmax_array.append(const.parmaxover_T)
             continue
-        if (depth_index[i] < 79):  # 这些有月平均
+        if (depth_index[i] < 79):  # has monthly climatological range data
             tmina = qc_object.tmin[ix, jy, depth_index[i], month - 1]
             tmaxa = qc_object.tmax[ix, jy, depth_index[i], month - 1]
             ##########2022.10.3 time-varying IAP-T-range
             T_clim_year=1981
-            # 对于最大值最小值的放松
+            # give tolerant for the threshold
             year_diff = iyear - T_clim_year
             if(year_diff>0):
                 coeff_Tmax = qc_object.kmax_T[ix, jy, depth_index[i], month-1]
@@ -85,7 +84,7 @@ def climatology_check(qc_object,depth, tem, meta):
                 tmina = const.parminover_T
             if (tmaxa >= const.parmaxover_T or np.isnan(tmaxa)):
                 tmaxa = const.parmaxover_T
-        elif (depth_index[i] >= 79 and depth_index[i] <= 98):  # 这些有季节平均
+        elif (depth_index[i] >= 79 and depth_index[i] <= 98):  # 2000m-4000m: seasonal climatological threshold
             # 判断是哪个季节，12，1，2为冬天
             if month in [3, 4, 5]:
                 imonth = 14
@@ -101,18 +100,17 @@ def climatology_check(qc_object,depth, tem, meta):
                 tmina = const.parminover_T
             if (tmaxa >= const.parmaxover_T or np.isnan(tmaxa)):
                 tmaxa = const.parmaxover_T
-        elif (depth_index[i] > 98):  # 这些有年平均
+        elif (depth_index[i] > 98):  # 4000m-6000m 'all years' climatological
             tmina = qc_object.tmin[ix, jy, depth_index[i] - 99, 16]
             tmaxa = qc_object.tmax[ix, jy, depth_index[i] - 99, 16]
             if (tmina <= const.parminover_T or np.isnan(tmina)):
                 tmina = const.parminover_T
             if (tmaxa >= const.parmaxover_T or np.isnan(
-                    tmaxa)):  ####这里未来可以添加一个，出现NaN的深度，把paraminover paramaxover去掉，换成上下平滑或者垂向去补充
+                    tmaxa)): 
                 tmaxa = const.parmaxover_T
         tmin_array.append(tmina)
         tmax_array.append(tmaxa)
 
-    # 开始标记
     # input torlerance and start flagging
     type_advanced = ['CTD', 'CT', 'CU', 'ctd', 'PFL', 'pfl', 'profiling', 'DRB', 'Drifting']
     if (meta.typ3 in type_advanced):

@@ -3,7 +3,7 @@ import gsw
 
 def freezing_point_check(qc_object,depth,tem,meta):
     levels = meta.levels
-    if(meta.lat<65 and meta.lat>-65):  ####非极地的廓线不检查
+    if(meta.lat<65 and meta.lat>-65):  ####no check for polar regions
         kflagt = np.zeros(levels, np.int)
         return kflagt
     try:
