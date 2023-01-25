@@ -54,7 +54,8 @@ If you have any questions/suggestions about this program, or if you find some bu
 
 
 
-**Reference: Tan Z., Cheng L., Gouretski V., Zhang B., Wang Y., Li F., Liu Z., Zhu J., 2022: A new automatic quality control system for ocean in-situ temperature observations and impact on ocean warming estimate. Deep Sea Research Part I, 103961, https://doi.org/10.1016/j.dsr.2022.103961 **
+## Citation: 
+Tan Z., Cheng L., Gouretski V., Zhang B., Wang Y., Li F., Liu Z., Zhu J., 2022: A new automatic quality control system for ocean in-situ temperature observations and impact on ocean warming estimate. Deep Sea Research Part I, 103961, https://doi.org/10.1016/j.dsr.2022.103961 
 
 
 
